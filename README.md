@@ -1,6 +1,6 @@
 <img src="assets/magicleap.png" width="240">
 
-###Research @ Magic Leap
+### Research @ Magic Leap
 
 # SuperPoint Weights File and Demo Script
 

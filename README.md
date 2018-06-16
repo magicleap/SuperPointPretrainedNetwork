@@ -26,8 +26,8 @@ MonoVO:
 <img src="assets/processed_monovo.gif" width="240">
 
 
-## Non-Standard Dependencies
-* [OpenCV](https://opencv.org/) python >= 2.4.13
+## Dependencies
+* [OpenCV](https://opencv.org/) python >= 3.4
 * [PyTorch](https://pytorch.org/) >= 0.4
 
 This repo depends on a few standard pythonic modules, plus OpenCV and PyTorch. These commands usually work (tested on Mac and Ubuntu) for installing the two libraries:
@@ -38,13 +38,13 @@ pip install torch
 ```
 
 ## Running the Demo
-This demo will run the SuperPoint network on an image sequence and compute points and descriptors from the images, using a helper class called `SuperPointFrontend`. The tracks are formed by the `PointTracker` class which finds sequential pair-wise nearest neighbors using two-way matching of the points' descriptors. The demo script uses helper class called `VideoStreamer` which can process inputs from three different input streams:
+This demo will run the SuperPoint network on an image sequence and compute points and descriptors from the images, using a helper class called `SuperPointFrontend`. The tracks are formed by the `PointTracker` class which finds sequential pair-wise nearest neighbors using two-way matching of the points' descriptors. The demo script uses a helper class called `VideoStreamer` which can process inputs from three different input streams:
 
 1. A directory of images, such as .png or .jpg
 2. A video file, such as .mp4 or .avi
 3. A USB Webcam
 
-### To run the demo on the example directory of .png images in CPU-mode, use:
+### Run the demo on provided *directory of images* in CPU-mode:
 
 ```sh
 ./demo_superpoint.py assets/icl_snippet/
@@ -53,7 +53,7 @@ You should see the following output from the ICL-NUIM sequence snippet:
 
 <img src="assets/processed_icl.gif" width="160">
 
-### To run the demo on the example .mp4 file in GPU-mode:
+### Run the demo on provided *.mp4 file* in GPU-mode:
 
 ```sh
 ./demo_superpoint.py assets/nyu_snippet.mp4 --cuda
@@ -62,18 +62,18 @@ You should see the following output from the NYU sequence snippet:
 
 <img src="assets/processed_nyu.gif" width="160">
 
-### To run the demo on a CPU with a usb webcam id #1, use:
+### Run a live demo via *webcam* (id #1) in CPU-mode:
 
 ```sh
 ./demo_superpoint.py camera --camid=1
 ```
 
-### To run the demo on a remote GPU on 640x480 images and write the output to `myoutput/`
+### Run the demo on a remote GPU (no display) on 640x480 images and write the output to `myoutput/`
 ```sh
 ./demo_superpoint.py assets/icl_snippet/ --W=640 --H=480 --no_display --write --write_dir=myoutput/
 ```
 
-### Additional command line parameters
+### Additional useful command line parameters
 
 * Use `--H` to change the input image height (default: 120).
 * Use `--W` to change the input image width (default: 160).
@@ -103,4 +103,5 @@ You should see the following output from the NYU sequence snippet:
 
 ## Additional Notes
 * We do not intend to release the SuperPoint training or evaluation code, please do not email us to ask for it.
+* We do not intend to release the Synthetic Shapes dataset used to bootstrap the SuperPoint training, please do not email us to ask for it.
 * We use bi-linear interpolation rather than the bi-cubic interpolation described in the paper to sample the descriptor as it is faster and gave us similar results.

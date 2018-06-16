@@ -44,7 +44,7 @@ This demo will run the SuperPoint network on an image sequence and compute point
 2. A video file, such as .mp4 or .avi
 3. A USB Webcam
 
-### Run the demo on provided *directory of images* in CPU-mode:
+### Run the demo on provided directory of images in CPU-mode:
 
 ```sh
 ./demo_superpoint.py assets/icl_snippet/
@@ -53,7 +53,7 @@ You should see the following output from the ICL-NUIM sequence snippet:
 
 <img src="assets/processed_icl.gif" width="160">
 
-### Run the demo on provided *.mp4 file* in GPU-mode:
+### Run the demo on provided .mp4 file in GPU-mode:
 
 ```sh
 ./demo_superpoint.py assets/nyu_snippet.mp4 --cuda
@@ -62,7 +62,7 @@ You should see the following output from the NYU sequence snippet:
 
 <img src="assets/processed_nyu.gif" width="160">
 
-### Run a live demo via *webcam* (id #1) in CPU-mode:
+### Run a live demo via webcam (id #1) in CPU-mode:
 
 ```sh
 ./demo_superpoint.py camera --camid=1

@@ -53,10 +53,9 @@ import time
 import cv2
 import torch
 
-# Stub to make video capture work with opencv2 and opencv3.
-if int(cv2.__version__[0]) != 3: # pragma: no cover
-  cv2.CAP_PROP_FRAME_COUNT = cv2.cv.CV_CAP_PROP_FRAME_COUNT
-  cv2.CAP_PROP_POS_FRAMES = cv2.cv.CV_CAP_PROP_POS_FRAMES
+# Stub to warn about opencv version.
+if int(cv2.__version__[0]) < 3: # pragma: no cover
+  print('Warning: OpenCV 3 is not installed')
 
 # Jet colormap for visualization.
 myjet = np.array([[0.        , 0.        , 0.5       ],

@@ -328,7 +328,7 @@ class PointTracker(object):
     if nn_thresh < 0.0:
       raise ValueError('\'nn_thresh\' should be non-negative')
     # Compute L2 distance. Easy since vectors are unit normalized.
-    dmat = np.dot(desc1.T, desc2.T.T)
+    dmat = np.dot(desc1.T, desc2)
     dmat = np.sqrt(2-2*np.clip(dmat, -1, 1))
     # Get NN indices and scores.
     idx = np.argmin(dmat, axis=1)

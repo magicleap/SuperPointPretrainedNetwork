@@ -9,6 +9,8 @@ This repo contains the pretrained SuperPoint network, as implemented by the orig
 
 * Full paper PDF: [SuperPoint: Self-Supervised Interest Point Detection and Description](https://arxiv.org/abs/1712.07629)
 
+* Presentation PDF: [Talk at CVPR Deep Learning for Visual SLAM Workshop 2018](assets/DL4VSLAM_talk.pdf)
+
 * Authors: *Daniel DeTone, Tomasz Malisiewicz, Andrew Rabinovich*
 
 This demo showcases a simple sparse optical flow point tracker that uses SuperPoint to detect points and match them across video sequences. The repo contains two core files (1) a PyTorch weights file and (2) a python deployment script that defines the network, loads images and runs the pytorch weights file on them, creating a sparse optical flow visualization. Here are videos of the demo running on various publically available datsets:  

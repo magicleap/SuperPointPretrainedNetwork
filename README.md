@@ -92,13 +92,13 @@ You should see the following output from the NYU sequence snippet:
 
 ## BibTeX Citation
 ```txt
-@inproceedings{detone17superpoint,
+@inproceedings{detone18superpoint,
   author    = {Daniel DeTone and
                Tomasz Malisiewicz and
                Andrew Rabinovich},
   title     = {SuperPoint: Self-Supervised Interest Point Detection and Description},
   booktitle = {CVPR Deep Learning for Visual SLAM Workshop},
-  year      = {2017},
+  year      = {2018},
   url       = {http://arxiv.org/abs/1712.07629}
 }
 ```

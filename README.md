@@ -107,3 +107,8 @@ You should see the following output from the NYU sequence snippet:
 * We do not intend to release the SuperPoint training or evaluation code, please do not email us to ask for it.
 * We do not intend to release the Synthetic Shapes dataset used to bootstrap the SuperPoint training, please do not email us to ask for it.
 * We use bi-linear interpolation rather than the bi-cubic interpolation described in the paper to sample the descriptor as it is faster and gave us similar results.
+
+## Legal Disclaimer
+Magic Leap is proud to provide its latest samples, toolkits, and research projects on Github to foster development and gather feedback from the spatial computing community. Use of the resources within this repo is subject to (a) the license(s) included herein, or (b) if no license is included, Magic Leap's Developer Agreement, which is available on our Developer Portal.
+If you need more, just ask on the forums!
+We're thrilled to be part of a well-meaning, friendly and welcoming community of millions.

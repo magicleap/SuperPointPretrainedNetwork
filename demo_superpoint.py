@@ -248,13 +248,13 @@ class SuperPointFrontend(object):
     heatmap = np.reshape(nodust, [Hc, Wc, self.cell, self.cell])
     heatmap = np.transpose(heatmap, [0, 2, 1, 3])
     heatmap = np.reshape(heatmap, [Hc*self.cell, Wc*self.cell])
-    xs, ys = np.where(heatmap >= self.conf_thresh) # Confidence threshold.
+    ys, xs = np.where(heatmap >= self.conf_thresh) # Confidence threshold.
     if len(xs) == 0:
       return np.zeros((3, 0)), None, None
     pts = np.zeros((3, len(xs))) # Populate point data sized 3xN.
-    pts[0, :] = ys
-    pts[1, :] = xs
-    pts[2, :] = heatmap[xs, ys]
+    pts[0, :] = xs
+    pts[1, :] = ys
+    pts[2, :] = heatmap[ys, xs]
     pts, _ = self.nms_fast(pts, H, W, dist_thresh=self.nms_dist) # Apply NMS.
     inds = np.argsort(pts[2,:])
     pts = pts[:,inds[::-1]] # Sort by confidence.

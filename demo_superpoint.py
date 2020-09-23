@@ -152,19 +152,19 @@ class SuperPointFrontend(object):
     """
     Run a faster approximate Non-Max-Suppression on numpy corners shaped:
       3xN [x_i,y_i,conf_i]^T
-  
+
     Algo summary: Create a grid sized HxW. Assign each corner location a 1, rest
     are zeros. Iterate through all the 1's and convert them either to -1 or 0.
     Suppress points by setting nearby values to 0.
-  
+
     Grid Value Legend:
     -1 : Kept.
      0 : Empty or suppressed.
      1 : To be processed (converted to either kept or supressed).
-  
+
     NOTE: The NMS first rounds points to integers, so NMS distance might not
     be exactly dist_thresh. It also assumes points are within image boundaries.
-  
+
     Inputs
       in_corners - 3xN numpy array with corners [x_i, y_i, confidence_i]^T.
       H - Image height.

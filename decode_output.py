@@ -1,10 +1,10 @@
 import torch
 
 # Constants
-cell_size = 8
+cell_size = 8  # Linear size of SuperPoint output cell
 
 # Parameters
-conf_thresh = 0.015  # Confidence threshold
+conf_thresh = 0.015  # Key point confidence threshold
 nms_dist = 4  # Non Maximum Suppression (NMS) distance
 border_padding = 4  # Remove key points this close to the border
 
@@ -35,7 +35,7 @@ def _nms_fast(in_keypts: torch.Tensor, h: int, w: int) -> torch.Tensor:
         return torch.reshape(torch.vstack([r_keypts, in_keypts[2]]), [3, 1])
 
     # Initialize the grid
-    for i in r_keypts.size(dim=0):
+    for i in range(r_keypts.size(dim=1)):
         grid[r_keypts[1, i], r_keypts[0, i]] = 1
         inds[r_keypts[1, i], r_keypts[0, i]] = i
 
@@ -52,7 +52,7 @@ def _nms_fast(in_keypts: torch.Tensor, h: int, w: int) -> torch.Tensor:
     # Get all surviving -1's and return sorted array of remaining corners
     keep_y, keep_x = torch.where(grid == -1)
     keep_y, keep_x = keep_y - nms_dist, keep_x - nms_dist
-    inds_keep = inds[keep_y, keep_x]
+    inds_keep = inds[keep_y, keep_x].long()
     out = keypts[:, inds_keep]
     sorted_inds = torch.argsort(-out[-1, :])
     out = out[:, sorted_inds]
@@ -102,8 +102,8 @@ def decode_output(semi_keypts: torch.Tensor, coarse_descrs: torch.Tensor, h: int
     keypts = _nms_fast(keypts, h, w)  # Apply NMS
 
     # Sort by confidence
-    sorted_inds = torch.argsort(keypts[2, :])
-    keypts = keypts[:, sorted_inds[::-1]]
+    sorted_inds = torch.argsort(keypts[2, :], descending=True)
+    keypts = keypts[:, sorted_inds]
 
     # Remove points along border
     to_remove_w = torch.logical_or(keypts[0, :] < border_padding, keypts[0, :] >= (w - border_padding))
@@ -120,10 +120,9 @@ def decode_output(semi_keypts: torch.Tensor, coarse_descrs: torch.Tensor, h: int
     sample_keypts = keypts[:2, :].clone()
     sample_keypts[0, :] = (sample_keypts[0, :] / (w / 2)) - 1
     sample_keypts[1, :] = (sample_keypts[1, :] / (h / 2)) - 1
-    sample_keypts = torch.permute(sample_keypts, [0, 1]).contiguous()
+    sample_keypts = torch.transpose(sample_keypts, 0, 1).contiguous()
     sample_keypts = sample_keypts.view(1, 1, -1, 2)
-    sample_keypts = sample_keypts.float()
-    descrs = torch.nn.functional.grid_sample(coarse_descrs, sample_keypts)
+    descrs = torch.nn.functional.grid_sample(coarse_descrs, sample_keypts, align_corners=True)
     descrs = torch.reshape(descrs, [coarse_descrs.size(dim=1), -1])
     descrs /= torch.linalg.norm(descrs, dim=0)[None, :]
 

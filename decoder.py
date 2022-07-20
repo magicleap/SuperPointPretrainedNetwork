@@ -39,7 +39,7 @@ class SuperPointDecoder(torch.nn.Module):
         # Sort by confidence and round to the nearest int
         sorted_inds = torch.argsort(-in_keypts[2, :])
         keypts = in_keypts[:, sorted_inds]
-        r_keypts = torch.round(keypts[:2, :]).int()
+        r_keypts = torch.round(keypts[:2, :]).long()
 
         # Check for edge case of 0 or 1 key points
         if r_keypts.size(dim=1) == 0:

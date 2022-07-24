@@ -1,4 +1,5 @@
 import torch
+from typing import Tuple
 
 
 class SuperPointDecoder(torch.nn.Module):
@@ -73,8 +74,8 @@ class SuperPointDecoder(torch.nn.Module):
         out = out[:, sorted_inds]
         return out
 
-    def forward(self, semi_keypts: torch.Tensor, coarse_descrs: torch.Tensor, h: int, w: int) -> tuple[
-        torch.Tensor, torch.Tensor]:
+    def forward(self, semi_keypts: torch.Tensor, coarse_descrs: torch.Tensor, h: int, w: int) -> \
+            Tuple[torch.Tensor, torch.Tensor]:
         """
         Decodes SuperPoint output extracting key points and descriptors.
 
